@@ -23,7 +23,7 @@ class CoinUseCase @Inject constructor(
     fun getCoinList(): Flow<DataState<List<Coin>>> = flow {
         emit(DataState.Loading)
         delay(100)
-        emit(startApiCall { repository.getCoins() })
+        emit(startApiCall { repository.getCoins().sortByName() })
     }
 }
 
