@@ -16,9 +16,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.coinlistapp.presentation.coinDetail.CoinDetailScreen
+import com.example.coinlistapp.presentation.coinDetail.CoinDetailViewModel
 import com.example.coinlistapp.presentation.coinList.CoinHomeScreen
 import com.example.coinlistapp.presentation.coinList.CoinListViewModel
 import com.example.coinlistapp.ui.theme.CoinListAppTheme
+import com.example.coinlistapp.util.CoinDetail
 import com.example.coinlistapp.util.Home
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,6 +33,7 @@ class MainActivity : ComponentActivity() {
             CoinListAppTheme {
                 val navController = rememberNavController()
 
+                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -53,10 +57,26 @@ class MainActivity : ComponentActivity() {
             composable(route = Home.route) {
                 HomeDestination(navController)
             }
+
+            composable(
+                route = CoinDetail.routeWithArgs,
+                arguments = CoinDetail.arguments
+            ) { navBackStackEntry ->
+//                navBackStackEntry.arguments?.getString(CoinDetail.coinIdArg)
+                CoinDetailDestination()
+            }
         }
     }
 
 
+}
+
+@Composable
+private fun CoinDetailDestination() {
+    val coinDetailViewModel: CoinDetailViewModel = hiltViewModel()
+
+    val state by coinDetailViewModel.state.collectAsState()
+    CoinDetailScreen(state = state)
 }
 
 @Composable
@@ -71,6 +91,9 @@ private fun HomeDestination(
         onRefreshRequested = { coinListViewModel.getCoinList() },
         onNavigationRequested = { itemId ->
             Log.d("onNavigationRequested", itemId)
+
+            navController.navigate("${CoinDetail.route}/$itemId")
+
         }
     )
 }
