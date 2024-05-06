@@ -2,11 +2,10 @@
 
 package com.example.coinlistapp.presentation.coinList
 
-import androidx.compose.animation.animateColor
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -27,7 +26,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -44,6 +43,8 @@ fun CoinHomeScreen(
     onRefreshRequested: () -> Unit,
     onNavigationRequested: (itemId: String) -> Unit
 ) {
+    val listItemVisibleAnimateState = remember { MutableTransitionState(false) }
+
     Scaffold(
         topBar = { CategoriesAppBar() },
         content = { padding ->
@@ -53,7 +54,10 @@ fun CoinHomeScreen(
                     .padding(padding)
             ) {
                 Button(
-                    onClick = onRefreshRequested,
+                    onClick = {
+                        onRefreshRequested()
+                        listItemVisibleAnimateState.targetState = false
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp)
@@ -61,7 +65,12 @@ fun CoinHomeScreen(
                 ) {
                     Text("Refresh Coins")
                 }
-                CoinList(state = state, onNavigationRequested = onNavigationRequested)
+
+                CoinList(
+                    state = state,
+                    visibleState = listItemVisibleAnimateState,
+                    onNavigationRequested = onNavigationRequested
+                )
                 Spacer(modifier = Modifier.weight(1f))
 
             }
@@ -84,7 +93,13 @@ private fun CategoriesAppBar() {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun CoinList(state: CoinListState, onNavigationRequested: (itemId: String) -> Unit) {
+fun CoinList(
+    state: CoinListState,
+    visibleState: MutableTransitionState<Boolean>,
+    onNavigationRequested: (itemId: String) -> Unit
+) {
+    visibleState.targetState = true
+
     if (state.isLoading) {
         CircularProgressIndicator(
             Modifier
@@ -94,15 +109,25 @@ fun CoinList(state: CoinListState, onNavigationRequested: (itemId: String) -> Un
     } else if (state.error != null) {
         Text("Error: ${state.error}")
     } else {
+
         LazyColumn {
             items(state.coins.size) { index ->
-                CoinItem(
-                    coin = state.coins[index],
-                    onClick = { onNavigationRequested(state.coins[index].id) },
-                    Modifier.animateItemPlacement()
-                )
-                if (index < state.coins.size - 1) { // Avoid adding a divider after the last item
-                    Divider()
+
+                AnimatedVisibility(
+                    visibleState = visibleState,
+                    enter = fadeIn(
+                        animationSpec = tween(durationMillis = 5000)
+                    )
+                ) {
+
+                    CoinItem(
+                        coin = state.coins[index],
+                        onClick = { onNavigationRequested(state.coins[index].id) },
+                        Modifier.animateItemPlacement()
+                    )
+                    if (index < state.coins.size - 1) { // Avoid adding a divider after the last item
+                        Divider()
+                    }
                 }
             }
         }
@@ -112,14 +137,6 @@ fun CoinList(state: CoinListState, onNavigationRequested: (itemId: String) -> Un
 
 @Composable
 fun CoinItem(coin: Coin, onClick: () -> Unit, modifier: Modifier) {
-    val infiniteTransition = rememberInfiniteTransition(label = "infinite transition")
-    val animatedColor by infiniteTransition.animateColor(
-        initialValue = Color(0xFF60DDAD),
-        targetValue = Color(0xFF4285F4),
-        animationSpec = infiniteRepeatable(tween(1000), RepeatMode.Reverse),
-        label = "color"
-    )
-
     Text(
         style = MaterialTheme.typography.titleMedium,
         text = coin.name,
@@ -127,7 +144,7 @@ fun CoinItem(coin: Coin, onClick: () -> Unit, modifier: Modifier) {
             .fillMaxWidth()
             .clickable(onClick = onClick)
             .padding(16.dp)
-            .background(color = animatedColor),
+            .background(color = Color.LightGray),
         textAlign = TextAlign.Center,
 
         color = Color.Black
@@ -162,6 +179,5 @@ fun DefaultPreview() {
             )
         ),
         onRefreshRequested = { },
-        onNavigationRequested = { }
-    )
+        onNavigationRequested = { })
 }
