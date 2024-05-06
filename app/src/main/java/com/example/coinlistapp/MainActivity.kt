@@ -33,7 +33,6 @@ class MainActivity : ComponentActivity() {
             CoinListAppTheme {
                 val navController = rememberNavController()
 
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -61,8 +60,7 @@ class MainActivity : ComponentActivity() {
             composable(
                 route = CoinDetail.routeWithArgs,
                 arguments = CoinDetail.arguments
-            ) { navBackStackEntry ->
-//                navBackStackEntry.arguments?.getString(CoinDetail.coinIdArg)
+            ) {
                 CoinDetailDestination()
             }
         }
@@ -74,7 +72,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun CoinDetailDestination() {
     val coinDetailViewModel: CoinDetailViewModel = hiltViewModel()
-
     val state by coinDetailViewModel.state.collectAsState()
     CoinDetailScreen(state = state)
 }
@@ -91,12 +88,7 @@ private fun HomeDestination(
         onRefreshRequested = { coinListViewModel.getCoinList() },
         onNavigationRequested = { itemId ->
             Log.d("onNavigationRequested", itemId)
-
             navController.navigate("${CoinDetail.route}/$itemId")
-
         }
     )
 }
-
-
-

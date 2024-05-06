@@ -14,7 +14,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.coinlistapp.R
 import com.example.coinlistapp.data.dto.CoinDetail
 
 @Composable
@@ -27,11 +29,11 @@ fun CoinDetailScreen(state: CoinDetailState) {
                     .wrapContentSize(Alignment.Center)
             )
         } else if (state.error != null) {
-            Text("Error: ${state.error}")
+            Text("${stringResource(id = R.string.coin_detail_id)} ${state.error}")
         } else if (state.coin != null) {
             CoinDetailContent(coinDetail = state.coin)
         } else {
-            Text("No coin data available")
+            Text(stringResource(id = R.string.empty_data_error))
         }
     }
 }
@@ -46,17 +48,23 @@ fun CoinDetailContent(coinDetail: CoinDetail) {
     ) {
         Text(text = coinDetail.name, style = MaterialTheme.typography.titleMedium)
         Spacer(modifier = Modifier.height(10.dp))
-        Text(text = "id: ${coinDetail.id}", style = MaterialTheme.typography.bodyMedium)
-        Spacer(modifier = Modifier.height(10.dp))
-        Text(text = "Symbol: ${coinDetail.symbol}", style = MaterialTheme.typography.bodyMedium)
-        Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = "Hash Algorithm: ${coinDetail.hashAlgorithm}",
+            text = "${stringResource(id = R.string.coin_detail_id)} ${coinDetail.id}",
             style = MaterialTheme.typography.bodyMedium
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = "Description: ${coinDetail.description}",
+            text = "${stringResource(id = R.string.coin_detail_symbol)} ${coinDetail.symbol}",
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "${stringResource(id = R.string.coin_detail_hash_algorithm)} ${coinDetail.hashAlgorithm}",
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "${stringResource(id = R.string.coin_detail_description)} ${coinDetail.description}",
             style = MaterialTheme.typography.bodyMedium
         )
     }
