@@ -2,6 +2,8 @@
     <string name="app_name">CoinListApp</string>
     <string name="empty_data_error">"No coin data available"</string>
 
+    <!--    CoinList Screen-->
+    <string name="coin_List_refresh">Refresh List</string>
 
     <!--    CoinDetail Screen-->
     <string name="coin_detail_error">Error:</string>

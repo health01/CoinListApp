@@ -63,7 +63,7 @@ fun CoinHomeScreen(
                         .padding(16.dp)
                         .align(Alignment.CenterHorizontally)
                 ) {
-                    Text("Refresh Coins")
+                    Text(stringResource(id = R.string.coin_List_refresh))
                 }
 
                 CoinList(
