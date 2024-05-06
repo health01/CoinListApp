@@ -3,7 +3,7 @@ package com.example.coinlistapp.data.repository
 import com.example.coinlistapp.data.dto.Coin
 import com.example.coinlistapp.data.dto.CoinDetail
 import com.example.coinlistapp.data.network.CoinAPiService
-import com.example.coinlistapp.repository.CoinRepository
+import com.example.coinlistapp.domain.repository.CoinRepository
 import javax.inject.Inject
 
 class CoinRepositoryImpl @Inject constructor(

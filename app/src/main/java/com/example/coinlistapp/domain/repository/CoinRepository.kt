@@ -1,4 +1,4 @@
-package com.example.coinlistapp.repository
+package com.example.coinlistapp.domain.repository
 
 import com.example.coinlistapp.data.dto.Coin
 import com.example.coinlistapp.data.dto.CoinDetail
