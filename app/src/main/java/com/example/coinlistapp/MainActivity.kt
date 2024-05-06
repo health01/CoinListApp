@@ -1,16 +1,25 @@
 package com.example.coinlistapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.coinlistapp.presentation.coinList.CoinHomeScreen
+import com.example.coinlistapp.presentation.coinList.CoinListViewModel
 import com.example.coinlistapp.ui.theme.CoinListAppTheme
+import com.example.coinlistapp.util.Home
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,30 +28,52 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             CoinListAppTheme {
-                // A surface container using the 'background' color from the theme
+                val navController = rememberNavController()
+
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    CoinNavHost(navController)
                 }
             }
         }
     }
+
+    @Composable
+    fun CoinNavHost(
+        navController: NavHostController,
+        modifier: Modifier = Modifier
+    ) {
+        NavHost(
+            navController = navController,
+            startDestination = Home.route,
+            modifier = modifier
+        ) {
+            composable(route = Home.route) {
+                HomeDestination(navController)
+            }
+        }
+    }
+
+
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
+private fun HomeDestination(
+    navController: NavHostController,
+) {
+    val coinListViewModel: CoinListViewModel = hiltViewModel()
+    val state by coinListViewModel.state.collectAsState()
+
+    CoinHomeScreen(
+        state = state,
+        onRefreshRequested = { coinListViewModel.getCoinList() },
+        onNavigationRequested = { itemId ->
+            Log.d("onNavigationRequested", itemId)
+        }
     )
 }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    CoinListAppTheme {
-        Greeting("Android")
-    }
-}
+
+
