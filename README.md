@@ -46,7 +46,9 @@ users with up-to-date information on various cryptocurrencies.
 3. **Build the Project**: Use the 'Build' option in Android Studio to compile the project.
 4. **Run the App**: Deploy the app to an Android emulator or a physical device.
 
-## Contributing
+## Running Tests
 
-Contributions are welcome! If you have suggestions or improvements, please fork the repository and
-submit a pull request.
+To run the unit tests for the application, execute the following command in your terminal:
+
+```bash
+./gradlew :app:testDebugUnitTest
