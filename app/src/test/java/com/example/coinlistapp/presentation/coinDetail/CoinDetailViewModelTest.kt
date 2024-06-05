@@ -58,8 +58,8 @@ class CoinDetailViewModelTest : BaseTestingViewModel() {
             viewModel.state.toList(results)
         }
 
-        advanceUntilIdle()
         viewModel.getCoinDetail("btc")
+        advanceUntilIdle()
 
         Assert.assertEquals(CoinDetailState(isLoading = false), results[0])
         Assert.assertEquals(CoinDetailState(isLoading = true), results[1])
