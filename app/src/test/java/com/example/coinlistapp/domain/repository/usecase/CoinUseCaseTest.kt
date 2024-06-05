@@ -82,18 +82,23 @@ class CoinUseCaseTest {
     @Test
     fun `test getCoinList`() = runTest {
         // Given
-        val expectedCoins = listOf(
+        val inCorrectOrderCoins = listOf(
+            Coin("ETH", "Ethereum", "ETH", 2, isNew = false, isActive = true, "crypto"),
             Coin("BTC", "Bitcoin", "BTC", 1, isNew = false, isActive = true, "crypto"),
-            Coin("ETH", "Ethereum", "ETH", 2, isNew = false, isActive = true, "crypto")
         )
-        coEvery { coinRepositoryImpl.getCoins() } returns expectedCoins.sortedBy { it.name }
+
+        val expectedOrderCoins = listOf(
+            Coin("BTC", "Bitcoin", "BTC", 1, isNew = false, isActive = true, "crypto"),
+            Coin("ETH", "Ethereum", "ETH", 2, isNew = false, isActive = true, "crypto"),
+        )
+        coEvery { coinRepositoryImpl.getCoins() } returns inCorrectOrderCoins
 
         // When
         val flow = coinUseCase.getCoinList()
         val dataState = flow.toList().last()
 
         // Then
-        assertEquals(DataState.Success(expectedCoins.sortedBy { it.name }), dataState)
+        assertEquals(DataState.Success(expectedOrderCoins), dataState)
     }
 
     @Test
