@@ -3,8 +3,8 @@ package com.example.coinlistapp.domain.repository.usecase
 import com.example.coinlistapp.data.DataState
 import com.example.coinlistapp.data.dto.Coin
 import com.example.coinlistapp.data.dto.CoinDetail
-import com.example.coinlistapp.data.network.CoinAPiService
 import com.example.coinlistapp.data.repository.CoinRepositoryImpl
+import com.example.coinlistapp.data.source.CoinAPiService
 import com.google.gson.JsonParseException
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery

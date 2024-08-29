@@ -1,4 +1,4 @@
-package com.example.coinlistapp.data.network
+package com.example.coinlistapp.data.source
 
 import com.example.coinlistapp.data.dto.Coin
 import com.example.coinlistapp.data.dto.CoinDetail

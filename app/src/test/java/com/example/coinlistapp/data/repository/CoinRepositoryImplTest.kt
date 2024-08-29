@@ -2,7 +2,7 @@ package com.example.coinlistapp.data.repository
 
 import com.example.coinlistapp.data.dto.Coin
 import com.example.coinlistapp.data.dto.CoinDetail
-import com.example.coinlistapp.data.network.CoinAPiService
+import com.example.coinlistapp.data.source.CoinAPiService
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK

@@ -1,8 +1,8 @@
 package com.example.coinlistapp.di
 
-import com.example.coinlistapp.data.network.CoinAPiService
+import com.example.coinlistapp.data.repository.CoinRepository
 import com.example.coinlistapp.data.repository.CoinRepositoryImpl
-import com.example.coinlistapp.domain.repository.CoinRepository
+import com.example.coinlistapp.data.source.CoinAPiService
 import com.example.coinlistapp.util.Constants
 import com.example.coinlistapp.util.DefaultCoroutineDispatchers
 import dagger.Module

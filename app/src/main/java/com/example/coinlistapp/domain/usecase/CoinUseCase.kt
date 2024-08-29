@@ -1,10 +1,11 @@
-package com.example.coinlistapp.domain.repository.usecase
+package com.example.coinlistapp.domain.usecase
 
 import com.example.coinlistapp.data.DataState
 import com.example.coinlistapp.data.dto.Coin
 import com.example.coinlistapp.data.dto.CoinDetail
-import com.example.coinlistapp.data.network.BasicApiCall
-import com.example.coinlistapp.domain.repository.CoinRepository
+import com.example.coinlistapp.data.mapper.sortByName
+import com.example.coinlistapp.data.repository.CoinRepository
+import com.example.coinlistapp.data.source.BasicApiCall
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

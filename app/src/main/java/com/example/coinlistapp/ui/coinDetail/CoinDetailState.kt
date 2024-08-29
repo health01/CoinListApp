@@ -1,4 +1,4 @@
-package com.example.coinlistapp.presentation.coinDetail
+package com.example.coinlistapp.ui.coinDetail
 
 import com.example.coinlistapp.data.DataState
 import com.example.coinlistapp.data.dto.CoinDetail

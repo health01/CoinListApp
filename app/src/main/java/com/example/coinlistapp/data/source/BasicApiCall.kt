@@ -1,4 +1,4 @@
-package com.example.coinlistapp.data.network
+package com.example.coinlistapp.data.source
 
 import com.example.coinlistapp.data.DataState
 import retrofit2.HttpException

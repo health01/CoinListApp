@@ -1,4 +1,4 @@
-package com.example.coinlistapp.domain.repository.usecase
+package com.example.coinlistapp.data.mapper
 
 import com.example.coinlistapp.data.dto.Coin
 

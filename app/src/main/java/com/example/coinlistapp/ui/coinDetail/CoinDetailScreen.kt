@@ -1,4 +1,4 @@
-package com.example.coinlistapp.presentation.coinDetail
+package com.example.coinlistapp.ui.coinDetail
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

@@ -1,10 +1,10 @@
-package com.example.coinlistapp.presentation.coinDetail
+package com.example.coinlistapp.ui.coinDetail
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.coinlistapp.data.DataState
-import com.example.coinlistapp.domain.repository.usecase.CoinUseCase
+import com.example.coinlistapp.domain.usecase.CoinUseCase
 import com.example.coinlistapp.util.CoinDetail
 import com.example.coinlistapp.util.DefaultCoroutineDispatchers
 import dagger.hilt.android.lifecycle.HiltViewModel

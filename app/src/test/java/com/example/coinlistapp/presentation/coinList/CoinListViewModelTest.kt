@@ -3,10 +3,12 @@ package com.example.coinlistapp.presentation.coinList
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.coinlistapp.data.DataState
 import com.example.coinlistapp.data.dto.Coin
-import com.example.coinlistapp.data.network.CoinAPiService
 import com.example.coinlistapp.data.repository.CoinRepositoryImpl
+import com.example.coinlistapp.data.source.CoinAPiService
 import com.example.coinlistapp.domain.repository.usecase.CoinUseCase
 import com.example.coinlistapp.presentation.viewmodel.BaseTestingViewModel
+import com.example.coinlistapp.ui.coinList.CoinListState
+import com.example.coinlistapp.ui.coinList.CoinListViewModel
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
