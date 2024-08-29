@@ -6,7 +6,7 @@ import com.example.coinlistapp.data.DataState
 import com.example.coinlistapp.data.dto.CoinDetail
 import com.example.coinlistapp.data.repository.CoinRepositoryImpl
 import com.example.coinlistapp.data.source.CoinAPiService
-import com.example.coinlistapp.domain.repository.usecase.CoinUseCase
+import com.example.coinlistapp.domain.usecase.CoinUseCase
 import com.example.coinlistapp.presentation.viewmodel.BaseTestingViewModel
 import com.example.coinlistapp.ui.coinDetail.CoinDetailState
 import com.example.coinlistapp.ui.coinDetail.CoinDetailViewModel
