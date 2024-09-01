@@ -1,4 +1,4 @@
-package com.example.coinlistapp.util
+package com.example.coinlistapp.navigation
 
 import androidx.navigation.NavType
 import androidx.navigation.navArgument

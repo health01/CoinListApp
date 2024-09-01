@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.coinlistapp.data.DataState
 import com.example.coinlistapp.domain.usecase.CoinUseCase
-import com.example.coinlistapp.util.CoinDetail
+import com.example.coinlistapp.navigation.CoinDetail
 import com.example.coinlistapp.util.DefaultCoroutineDispatchers
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

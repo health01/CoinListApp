@@ -16,13 +16,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.coinlistapp.navigation.CoinDetail
+import com.example.coinlistapp.navigation.Home
 import com.example.coinlistapp.ui.coinDetail.CoinDetailScreen
 import com.example.coinlistapp.ui.coinDetail.CoinDetailViewModel
 import com.example.coinlistapp.ui.coinList.CoinHomeScreen
 import com.example.coinlistapp.ui.coinList.CoinListViewModel
 import com.example.coinlistapp.ui.theme.CoinListAppTheme
-import com.example.coinlistapp.util.CoinDetail
-import com.example.coinlistapp.util.Home
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
