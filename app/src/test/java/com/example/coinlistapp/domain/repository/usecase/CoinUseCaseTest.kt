@@ -5,6 +5,7 @@ import com.example.coinlistapp.data.dto.Coin
 import com.example.coinlistapp.data.dto.CoinDetail
 import com.example.coinlistapp.data.repository.CoinRepositoryImpl
 import com.example.coinlistapp.data.source.CoinAPiService
+import com.example.coinlistapp.domain.usecase.CoinUseCase
 import com.google.gson.JsonParseException
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
